@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hopl'IA — Infiniment Alsacienne</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d0d2b;
+    --navy-light: #13133a;
+    --navy-mid: #1a1a4a;
+    --pink: #ff3d6e;
+    --pink-light: #ff6b90;
+    --white: #f5f5ff;
+    --muted: #8888bb;
+    --border: rgba(255,255,255,0.08);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–navy);
+color: var(–white);
+font-family: ‘DM Sans’, sans-serif;
+overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 512 512’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 0;
+opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 1.2rem 5%;
+backdrop-filter: blur(20px);
+background: rgba(13,13,43,0.7);
+border-bottom: 1px solid var(–border);
+}
+
+.nav-logo {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: 1.4rem;
+letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(–pink); }
+
+nav ul {
+display: flex;
+gap: 2rem;
+list-style: none;
+}
+nav ul a {
+color: var(–muted);
+text-decoration: none;
+font-size: 0.9rem;
+font-weight: 500;
+transition: color 0.2s;
+}
+nav ul a:hover { color: var(–white); }
+
+.nav-cta {
+background: var(–pink);
+color: #fff !important;
+padding: 0.5rem 1.2rem;
+border-radius: 100px;
+font-weight: 600 !important;
+transition: background 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover { background: var(–pink-light) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 8rem 5% 5rem;
+position: relative;
+overflow: hidden;
+}
+
+.hero-glow {
+position: absolute;
+width: 700px; height: 700px;
+background: radial-gradient(circle, rgba(255,61,110,0.12) 0%, transparent 70%);
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+pointer-events: none;
+}
+.hero-glow2 {
+position: absolute;
+width: 400px; height: 400px;
+background: radial-gradient(circle, rgba(80,80,200,0.15) 0%, transparent 70%);
+top: 20%; left: 10%;
+pointer-events: none;
+}
+
+/* Animated infinity SVG */
+.infinity-hero {
+width: 160px;
+margin-bottom: 2rem;
+animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-12px); }
+}
+
+.badge {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+background: rgba(255,61,110,0.12);
+border: 1px solid rgba(255,61,110,0.3);
+color: var(–pink-light);
+font-size: 0.8rem;
+font-weight: 600;
+padding: 0.35rem 1rem;
+border-radius: 100px;
+margin-bottom: 1.5rem;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+animation: fadeUp 0.6s ease both;
+}
+
+h1 {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: clamp(2.8rem, 6vw, 5.5rem);
+line-height: 1.05;
+letter-spacing: -0.03em;
+margin-bottom: 1.5rem;
+animation: fadeUp 0.7s 0.1s ease both;
+}
+h1 em { font-style: normal; color: var(–pink); }
+
+.hero-sub {
+font-size: clamp(1rem, 2vw, 1.2rem);
+color: var(–muted);
+max-width: 600px;
+line-height: 1.7;
+margin-bottom: 2.5rem;
+animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-btns {
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.btn-primary {
+background: var(–pink);
+color: #fff;
+padding: 0.9rem 2rem;
+border-radius: 100px;
+font-weight: 600;
+font-size: 1rem;
+text-decoration: none;
+transition: all 0.25s;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+.btn-primary:hover { background: var(–pink-light); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,61,110,0.3); }
+
+.btn-secondary {
+background: transparent;
+color: var(–white);
+padding: 0.9rem 2rem;
+border-radius: 100px;
+font-weight: 500;
+font-size: 1rem;
+text-decoration: none;
+border: 1px solid var(–border);
+transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+
+.hero-stats {
+display: flex;
+gap: 3rem;
+margin-top: 4rem;
+animation: fadeUp 0.7s 0.4s ease both;
+}
+.stat-item { text-align: center; }
+.stat-num {
+font-family: ‘Syne’, sans-serif;
+font-size: 2rem;
+font-weight: 800;
+color: var(–white);
+}
+.stat-num span { color: var(–pink); }
+.stat-label { font-size: 0.8rem; color: var(–muted); margin-top: 0.2rem; }
+
+/* ── SECTIONS COMMUNES ── */
+section { position: relative; z-index: 1; }
+
+.section-label {
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–pink);
+margin-bottom: 0.8rem;
+}
+
+h2 {
+font-family: ‘Syne’, sans-serif;
+font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+font-weight: 800;
+letter-spacing: -0.02em;
+line-height: 1.15;
+}
+h2 em { font-style: normal; color: var(–pink); }
+
+/* ── AUDIT ── */
+.audit {
+background: linear-gradient(135deg, var(–navy-light), var(–navy-mid));
+border-top: 1px solid var(–border);
+border-bottom: 1px solid var(–border);
+padding: 6rem 5%;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 5rem;
+align-items: center;
+}
+
+.audit-steps {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+margin-top: 2.5rem;
+}
+
+.audit-step {
+display: flex;
+gap: 1rem;
+align-items: flex-start;
+padding: 1.2rem;
+border-radius: 12px;
+border: 1px solid var(–border);
+background: rgba(255,255,255,0.03);
+transition: border-color 0.2s, background 0.2s;
+}
+.audit-step:hover {
+border-color: rgba(255,61,110,0.3);
+background: rgba(255,61,110,0.04);
+}
+
+.step-num {
+font-family: ‘Syne’, sans-serif;
+font-size: 1.4rem;
+font-weight: 800;
+color: var(–pink);
+min-width: 2rem;
+line-height: 1;
+}
+
+.step-content h4 {
+font-family: ‘Syne’, sans-serif;
+font-weight: 700;
+margin-bottom: 0.3rem;
+}
+.step-content p { font-size: 0.9rem; color: var(–muted); line-height: 1.6; }
+
+.audit-card {
+background: rgba(255,61,110,0.07);
+border: 1px solid rgba(255,61,110,0.2);
+border-radius: 20px;
+padding: 2.5rem;
+text-align: center;
+}
+.audit-card .big-text {
+font-family: ‘Syne’, sans-serif;
+font-size: 5rem;
+font-weight: 800;
+color: var(–pink);
+line-height: 1;
+margin-bottom: 0.5rem;
+}
+.audit-card h3 {
+font-family: ‘Syne’, sans-serif;
+font-size: 1.5rem;
+font-weight: 700;
+margin-bottom: 1rem;
+}
+.audit-card p { color: var(–muted); line-height: 1.7; font-size: 0.95rem; }
+
+.free-tag {
+display: inline-block;
+background: var(–pink);
+color: #fff;
+font-weight: 700;
+font-size: 0.75rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+padding: 0.3rem 0.8rem;
+border-radius: 100px;
+margin-top: 1.5rem;
+}
+
+/* ── SERVICES ── */
+.services {
+padding: 7rem 5%;
+text-align: center;
+}
+.services-header { margin-bottom: 3.5rem; }
+.services-header p { color: var(–muted); margin-top: 1rem; font-size: 1.05rem; }
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.5rem;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+.service-card {
+background: var(–navy-light);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 2rem;
+text-align: left;
+transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.service-card:hover {
+transform: translateY(-5px);
+border-color: rgba(255,61,110,0.3);
+box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.service-icon {
+width: 48px; height: 48px;
+background: rgba(255,61,110,0.1);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.4rem;
+margin-bottom: 1.2rem;
+}
+
+.service-card h3 {
+font-family: ‘Syne’, sans-serif;
+font-size: 1.1rem;
+font-weight: 700;
+margin-bottom: 0.6rem;
+}
+.service-card p { font-size: 0.88rem; color: var(–muted); line-height: 1.6; }
+
+.service-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+margin-top: 1.2rem;
+}
+.tag {
+font-size: 0.72rem;
+padding: 0.25rem 0.7rem;
+border-radius: 100px;
+background: rgba(255,255,255,0.05);
+border: 1px solid var(–border);
+color: var(–muted);
+}
+
+/* ── FORFAITS ── */
+.pricing {
+padding: 7rem 5%;
+background: var(–navy-light);
+border-top: 1px solid var(–border);
+border-bottom: 1px solid var(–border);
+text-align: center;
+}
+.pricing-header { margin-bottom: 3.5rem; }
+.pricing-header p { color: var(–muted); margin-top: 1rem; }
+
+.pricing-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.5rem;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.pricing-card {
+background: var(–navy);
+border: 1px solid var(–border);
+border-radius: 20px;
+padding: 2rem;
+text-align: left;
+position: relative;
+transition: transform 0.25s, box-shadow 0.25s;
+}
+.pricing-card:hover { transform: translateY(-5px); box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
+
+.pricing-card.featured {
+border-color: rgba(255,61,110,0.4);
+background: linear-gradient(160deg, rgba(255,61,110,0.06), var(–navy));
+}
+.popular-badge {
+position: absolute;
+top: -12px; left: 50%; transform: translateX(-50%);
+background: var(–pink);
+color: #fff;
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 0.25rem 1rem;
+border-radius: 100px;
+white-space: nowrap;
+}
+
+.plan-name {
+font-family: ‘Syne’, sans-serif;
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 0.5rem;
+}
+.plan-price {
+font-family: ‘Syne’, sans-serif;
+font-size: 2.2rem;
+font-weight: 800;
+margin-bottom: 0.2rem;
+}
+.plan-price span { font-size: 1rem; font-weight: 400; color: var(–muted); }
+.plan-desc { font-size: 0.85rem; color: var(–muted); margin-bottom: 1.5rem; line-height: 1.5; }
+
+.plan-features {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 0.7rem;
+margin-bottom: 1.8rem;
+}
+.plan-features li {
+font-size: 0.88rem;
+display: flex;
+align-items: flex-start;
+gap: 0.6rem;
+line-height: 1.4;
+}
+.plan-features li::before {
+content: ‘✓’;
+color: var(–pink);
+font-weight: 700;
+flex-shrink: 0;
+margin-top: 0.05rem;
+}
+
+.plan-options {
+font-size: 0.78rem;
+color: var(–muted);
+padding-top: 1rem;
+border-top: 1px solid var(–border);
+line-height: 1.6;
+}
+
+.btn-plan {
+display: block;
+text-align: center;
+padding: 0.75rem;
+border-radius: 10px;
+font-weight: 600;
+font-size: 0.9rem;
+text-decoration: none;
+transition: all 0.2s;
+margin-bottom: 1rem;
+}
+.btn-plan-outline {
+border: 1px solid var(–border);
+color: var(–white);
+}
+.btn-plan-outline:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+.btn-plan-filled {
+background: var(–pink);
+color: #fff;
+}
+.btn-plan-filled:hover { background: var(–pink-light); box-shadow: 0 8px 25px rgba(255,61,110,0.3); }
+
+/* ── RECURRENT ── */
+.recurrent {
+padding: 7rem 5%;
+text-align: center;
+}
+.recurrent-header { margin-bottom: 3rem; }
+.recurrent-header p { color: var(–muted); margin-top: 1rem; }
+
+.recurrent-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.5rem;
+max-width: 900px;
+margin: 0 auto;
+}
+.recurrent-card {
+background: var(–navy-light);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 2rem;
+text-align: left;
+transition: border-color 0.2s;
+}
+.recurrent-card:hover { border-color: rgba(255,61,110,0.3); }
+
+.recurrent-price {
+font-family: ‘Syne’, sans-serif;
+font-size: 1.6rem;
+font-weight: 800;
+color: var(–pink);
+margin: 0.5rem 0;
+}
+.recurrent-card h4 {
+font-family: ‘Syne’, sans-serif;
+font-size: 1rem;
+font-weight: 700;
+}
+.recurrent-card p { font-size: 0.85rem; color: var(–muted); line-height: 1.6; margin-top: 0.5rem; }
+
+/* ── SECTEUR ── */
+.secteur {
+padding: 7rem 5%;
+background: var(–navy-light);
+border-top: 1px solid var(–border);
+border-bottom: 1px solid var(–border);
+}
+.secteur-inner {
+max-width: 1100px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr 1.5fr;
+gap: 5rem;
+align-items: center;
+}
+.secteur h2 { margin-bottom: 1rem; }
+.secteur p { color: var(–muted); line-height: 1.7; margin-bottom: 1.5rem; }
+
+.secteur-list {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+.secteur-item {
+display: flex;
+align-items: center;
+gap: 1rem;
+padding: 1rem 1.2rem;
+border-radius: 12px;
+border: 1px solid var(–border);
+background: rgba(255,255,255,0.02);
+transition: all 0.2s;
+}
+.secteur-item:hover { border-color: rgba(255,61,110,0.3); background: rgba(255,61,110,0.04); }
+.secteur-icon { font-size: 1.4rem; min-width: 2rem; text-align: center; }
+.secteur-item h4 { font-family: ‘Syne’, sans-serif; font-size: 0.95rem; font-weight: 700; }
+.secteur-item p { font-size: 0.82rem; color: var(–muted); margin: 0; }
+
+/* ── ROADMAP ── */
+.roadmap {
+padding: 7rem 5%;
+text-align: center;
+}
+.roadmap-header { margin-bottom: 3.5rem; }
+.roadmap-header p { color: var(–muted); margin-top: 1rem; }
+
+.roadmap-timeline {
+max-width: 800px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+gap: 0;
+position: relative;
+}
+.roadmap-timeline::before {
+content: ‘’;
+position: absolute;
+left: 1.8rem;
+top: 0; bottom: 0;
+width: 2px;
+background: linear-gradient(to bottom, var(–pink), transparent);
+}
+
+.roadmap-item {
+display: flex;
+gap: 1.5rem;
+align-items: flex-start;
+padding: 1.5rem 0;
+text-align: left;
+}
+.roadmap-dot {
+width: 3.6rem; height: 3.6rem;
+border-radius: 50%;
+background: var(–navy-mid);
+border: 2px solid rgba(255,61,110,0.4);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1rem;
+flex-shrink: 0;
+z-index: 1;
+}
+.roadmap-item:first-child .roadmap-dot { background: rgba(255,61,110,0.15); border-color: var(–pink); }
+
+.roadmap-content h4 { font-family: ‘Syne’, sans-serif; font-weight: 700; margin-bottom: 0.3rem; }
+.roadmap-content span { font-size: 0.75rem; color: var(–pink); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.roadmap-content p { font-size: 0.88rem; color: var(–muted); margin-top: 0.4rem; line-height: 1.6; }
+
+/* ── CTA FINAL ── */
+.cta-section {
+padding: 7rem 5%;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.cta-section::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: radial-gradient(ellipse at center, rgba(255,61,110,0.08) 0%, transparent 70%);
+}
+.cta-section h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
+.cta-section p { color: var(–muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer {
+padding: 2rem 5%;
+border-top: 1px solid var(–border);
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.footer-logo { font-family: ‘Syne’, sans-serif; font-weight: 800; font-size: 1.1rem; }
+.footer-logo span { color: var(–pink); }
+footer p { font-size: 0.82rem; color: var(–muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+.audit { grid-template-columns: 1fr; gap: 3rem; }
+.services-grid, .pricing-grid, .recurrent-grid { grid-template-columns: 1fr; }
+.secteur-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+nav ul { display: none; }
+.hero-stats { gap: 1.5rem; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">Hopl'<span>IA</span></div>
+  <ul>
+    <li><a href="#audit">Audit gratuit</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#forfaits">Forfaits</a></li>
+    <li><a href="#contact" class="nav-cta">Nous contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <!-- Logo SVG animé -->
+
+  <svg class="infinity-hero" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 60 C60 35 35 20 15 35 C-5 50 -5 70 15 85 C35 100 60 85 100 60 C140 35 165 20 185 35 C205 50 205 70 185 85 C165 100 140 85 100 60 Z"
+      stroke="white" stroke-width="8" fill="none" stroke-linecap="round"
+      style="stroke-dasharray:400; animation: draw 3s ease forwards;">
+      <animate attributeName="stroke-dashoffset" from="400" to="0" dur="2s" fill="freeze"/>
+    </path>
+    <circle cx="72" cy="42" r="7" fill="#ff3d6e">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="128" cy="78" r="7" fill="#ff3d6e">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="badge">🌱 Strasbourg · Alsace · 2025</div>
+  <h1>L'IA au service<br>des <em>PME alsaciennes</em></h1>
+  <p class="hero-sub">Hopl'IA vous accompagne dans la transformation digitale de votre entreprise — sites web, applications, automatisation et formations IA sur mesure.</p>
+  <div class="hero-btns">
+    <a href="#audit" class="btn-primary">Audit gratuit →</a>
+    <a href="#forfaits" class="btn-secondary">Voir les forfaits</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">experts à Strasbourg</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Alsacien</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">possibilités IA</div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT GRATUIT -->
+
+<section class="audit" id="audit">
+  <div class="reveal">
+    <div class="section-label">Point d'entrée</div>
+    <h2>L'Audit IA<br><em>100% gratuit</em></h2>
+    <p style="color:var(--muted);margin:1rem 0 0;line-height:1.7;">Notre première rencontre est toujours sans engagement. En 1h, on identifie ensemble vos opportunités d'optimisation concrètes.</p>
+    <div class="audit-steps">
+      <div class="audit-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Cartographie des tâches</h4>
+          <p>On identifie vos processus les plus chronophages et répétitifs.</p>
+        </div>
+      </div>
+      <div class="audit-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>3 quick wins IA</h4>
+          <p>On vous présente 3 actions concrètes à fort impact, applicables rapidement.</p>
+        </div>
+      </div>
+      <div class="audit-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Rapport personnalisé</h4>
+          <p>Vous repartez avec un document de synthèse, que vous signiez avec nous ou non.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="audit-card">
+      <div class="big-text">1h</div>
+      <h3>Audit de transformation digitale</h3>
+      <p>Sur site ou en visio, avec un expert Hopl'IA. On analyse votre situation et on vous propose un plan d'action sur-mesure sans jargon technique.</p>
+      <div class="free-tag">✦ Entièrement gratuit</div>
+      <br><br>
+      <a href="#contact" class="btn-primary" style="display:inline-flex;">Réserver mon audit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div class="section-label">Ce qu'on fait</div>
+    <h2>Nos <em>services</em></h2>
+    <p>De la stratégie à la livraison, on couvre l'intégralité de votre transformation digitale.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🌐</div>
+      <h3>Sites Web & E-commerce</h3>
+      <p>Des sites performants, modernes et optimisés SEO. De la vitrine simple au catalogue e-commerce complet.</p>
+      <div class="service-tags">
+        <span class="tag">Vitrine</span>
+        <span class="tag">E-commerce</span>
+        <span class="tag">Multilingue</span>
+        <span class="tag">SEO</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🤖</div>
+      <h3>Automatisation IA</h3>
+      <p>On automatise vos tâches répétitives : devis, relances, reporting, tri d'emails. Gagnez des heures chaque semaine.</p>
+      <div class="service-tags">
+        <span class="tag">Chatbots</span>
+        <span class="tag">Reporting</span>
+        <span class="tag">Flux métier</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📱</div>
+      <h3>Applications Mobiles</h3>
+      <p>iOS et Android. Espace client, suivi de commande, catalogue produit — adapté à votre secteur.</p>
+      <div class="service-tags">
+        <span class="tag">iOS</span>
+        <span class="tag">Android</span>
+        <span class="tag">PWA</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📊</div>
+      <h3>Tableaux de bord</h3>
+      <p>Visualisez vos KPIs en temps réel. Connectés à vos outils existants (ERP, CRM, Excel...).</p>
+      <div class="service-tags">
+        <span class="tag">KPIs</span>
+        <span class="tag">Temps réel</span>
+        <span class="tag">Intégrations</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎓</div>
+      <h3>Formations IA</h3>
+      <p>Rendez vos équipes autonomes avec l'IA. Sessions pratiques, adaptées à votre métier et votre niveau.</p>
+      <div class="service-tags">
+        <span class="tag">Sur site</span>
+        <span class="tag">E-learning</span>
+        <span class="tag">Certifiant</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🔧</div>
+      <h3>Maintenance & Suivi</h3>
+      <p>On reste à vos côtés après la livraison. Mises à jour, optimisations et support prioritaire.</p>
+      <div class="service-tags">
+        <span class="tag">Support</span>
+        <span class="tag">Mises à jour</span>
+        <span class="tag">Optimisation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORFAITS -->
+
+<section class="pricing" id="forfaits">
+  <div class="pricing-header reveal">
+    <div class="section-label">Tarifs</div>
+    <h2>Des <em>forfaits clairs</em><br>sans surprises</h2>
+    <p>Milieu de gamme, taillé pour les PME alsaciennes. Options modulables selon vos besoins.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">2 500 € <span>et +</span></div>
+      <div class="plan-desc">Pour les TPE qui veulent se digitaliser efficacement.</div>
+      <a href="#contact" class="btn-plan btn-plan-outline">Démarrer →</a>
+      <ul class="plan-features">
+        <li>Site vitrine professionnel</li>
+        <li>Formulaire de devis intelligent</li>
+        <li>Intégration Google Maps & avis</li>
+        <li>1 mois de support inclus</li>
+      </ul>
+      <div class="plan-options">+ Options : Chatbot (+500€) · Charte graphique (+800€)</div>
+    </div>
+    <div class="pricing-card featured reveal">
+      <div class="popular-badge">⭐ Le plus populaire</div>
+      <div class="plan-name">Business</div>
+      <div class="plan-price">6 000 € <span>et +</span></div>
+      <div class="plan-desc">Pour les PME qui veulent optimiser leur gestion au quotidien.</div>
+      <a href="#contact" class="btn-plan btn-plan-filled">Démarrer →</a>
+      <ul class="plan-features">
+        <li>Site web complet + espace client</li>
+        <li>Automatisation d'un process métier</li>
+        <li>Tableau de bord KPIs</li>
+        <li>Formation équipe (demi-journée)</li>
+        <li>3 mois de support inclus</li>
+      </ul>
+      <div class="plan-options">+ Options : App mobile (+3k€) · ERP/CRM (+2k€) · Formation complète (+1,2k€)</div>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="plan-name">Industrie+</div>
+      <div class="plan-price">Sur <span>devis</span></div>
+      <div class="plan-desc">Pour les PME industrielles avec des besoins complexes.</div>
+      <a href="#contact" class="btn-plan btn-plan-outline">Demander un devis →</a>
+      <ul class="plan-features">
+        <li>Audit complet des process</li>
+        <li>Développement sur-mesure</li>
+        <li>Intégration outils existants</li>
+        <li>Formation & accompagnement</li>
+        <li>Support prioritaire 6 mois</li>
+      </ul>
+      <div class="plan-options">À partir de 15 000 € · Devis personnalisé après audit</div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURRENT -->
+
+<section class="recurrent">
+  <div class="recurrent-header reveal">
+    <div class="section-label">Abonnements</div>
+    <h2>Un partenariat <em>dans la durée</em></h2>
+    <p>Des revenus prévisibles pour vous, un accompagnement continu pour vos clients.</p>
+  </div>
+  <div class="recurrent-grid">
+    <div class="recurrent-card reveal">
+      <h4>🛠 Maintenance</h4>
+      <div class="recurrent-price">150 – 300 €<small style="font-size:1rem;color:var(--muted)">/mois</small></div>
+      <p>Mises à jour, sécurité et support technique réactif pour votre site ou application.</p>
+    </div>
+    <div class="recurrent-card reveal">
+      <h4>🤖 Pilotage IA</h4>
+      <div class="recurrent-price">400 – 800 €<small style="font-size:1rem;color:var(--muted)">/mois</small></div>
+      <p>Suivi et optimisation continue des outils IA déployés. Rapports mensuels inclus.</p>
+    </div>
+    <div class="recurrent-card reveal">
+      <h4>🎓 Formation continue</h4>
+      <div class="recurrent-price">300 – 500 €<small style="font-size:1rem;color:var(--muted)">/mois</small></div>
+      <p>2h/mois d'accompagnement de vos équipes sur les nouveaux outils IA métier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTEUR -->
+
+<section class="secteur">
+  <div class="secteur-inner">
+    <div class="reveal">
+      <div class="section-label">Focus</div>
+      <h2>Spécialisés <em>Industrie<br>& PME</em> Alsace</h2>
+      <p>Le Bas-Rhin est l'un des départements les plus industrialisés de France. On connaît vos enjeux, votre terrain, vos clients.</p>
+      <a href="#audit" class="btn-primary">Réserver mon audit gratuit →</a>
+    </div>
+    <div class="secteur-list reveal">
+      <div class="secteur-item">
+        <div class="secteur-icon">🏭</div>
+        <div>
+          <h4>Industrie manufacturière</h4>
+          <p>Automatisation des reportings, suivi de production, alertes qualité</p>
+        </div>
+      </div>
+      <div class="secteur-item">
+        <div class="secteur-icon">🔧</div>
+        <div>
+          <h4>BTP & Artisanat</h4>
+          <p>Devis automatisés, planning chantier, suivi client mobile</p>
+        </div>
+      </div>
+      <div class="secteur-item">
+        <div class="secteur-icon">⚖️</div>
+        <div>
+          <h4>Professions libérales</h4>
+          <p>Portail client sécurisé, gestion documentaire, automatisation admin</p>
+        </div>
+      </div>
+      <div class="secteur-item">
+        <div class="secteur-icon">🛍️</div>
+        <div>
+          <h4>Commerce & Retail</h4>
+          <p>E-commerce, gestion stocks IA, communication automatisée</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+
+<section class="roadmap">
+  <div class="roadmap-header reveal">
+    <div class="section-label">Notre méthode</div>
+    <h2>Comment ça <em>se passe</em> ?</h2>
+    <p>Un processus transparent, de l'audit à la livraison.</p>
+  </div>
+  <div class="roadmap-timeline">
+    <div class="roadmap-item reveal">
+      <div class="roadmap-dot">🔍</div>
+      <div class="roadmap-content">
+        <span>Étape 1 · Gratuit</span>
+        <h4>Audit IA sur site ou visio</h4>
+        <p>On vient chez vous (ou en visio) pour comprendre votre activité, vos process et vos blocages.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-dot">📋</div>
+      <div class="roadmap-content">
+        <span>Étape 2 · J+3</span>
+        <h4>Proposition personnalisée</h4>
+        <p>On vous envoie un devis détaillé avec les solutions retenues, les délais et le budget exact.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-dot">⚡</div>
+      <div class="roadmap-content">
+        <span>Étape 3 · Production</span>
+        <h4>Développement & itérations</h4>
+        <p>Vous validez chaque étape. On livre en sprint avec des points réguliers.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-dot">🚀</div>
+      <div class="roadmap-content">
+        <span>Étape 4 · Livraison</span>
+        <h4>Formation & mise en production</h4>
+        <p>On forme vos équipes et on reste disponibles. Pas d'abandon post-livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta-section" id="contact">
+  <div class="reveal">
+    <div class="section-label">On commence ?</div>
+    <h2>Votre audit <em>gratuit</em><br>vous attend</h2>
+    <p>1 heure, sans engagement, pour repartir avec des actions concrètes. On se déplace à Strasbourg et alentours.</p>
+    <a href="mailto:contact@hoplia.fr" class="btn-primary" style="display:inline-flex;font-size:1.05rem;padding:1rem 2.5rem;">
+      📩 Écrire à Hopl'IA
+    </a>
+    <p style="margin-top:1.5rem;font-size:0.85rem;">Ou appelez-nous directement · Strasbourg & alentours</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">Hopl'<span>IA</span></div>
+  <p>Infiniment Alsacienne · Strasbourg · 2025</p>
+  <p style="font-size:0.78rem;">contact@hoplia.fr</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
